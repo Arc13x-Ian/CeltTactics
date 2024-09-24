@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - WaterTile
+  - Enemy
+  - Healing
+  - GoalFort
+  - FriendlyUnit
   layers:
   - Default
   - TransparentFX
