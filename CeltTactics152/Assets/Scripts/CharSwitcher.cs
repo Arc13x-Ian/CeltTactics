@@ -5,11 +5,11 @@ using UnityEngine;
 public class CharSwitcher : MonoBehaviour
 {
 
-    public GameObject Hero;
-    public GameObject Two;
-    public GameObject Three;
-    public GameObject Four;
-    public GameObject Five;
+    public CombatStats Hero;
+    public CombatStats Two;
+    public CombatStats Three;
+    public CombatStats Four;
+    public CombatStats Five;
 
     public GameObject[] Units;
 
@@ -21,10 +21,15 @@ public class CharSwitcher : MonoBehaviour
     {
         //heroScript = Hero.GetComponent("CharacterMover");
         //twoScript = Two.GetComponent("CharacterMover");
-        Two.GetComponent<CharacterMover>().enabled = false;
+        Units[1].GetComponent<CharacterMover>().enabled = false;
         Units[2].GetComponent<CharacterMover>().enabled = false;
+        Units[3].GetComponent<CharacterMover>().enabled = false;
+        Units[4].GetComponent<CharacterMover>().enabled = false;
+
         Units[1].GetComponent<Light>().enabled = false;
         Units[2].GetComponent<Light>().enabled = false;
+        Units[3].GetComponent<Light>().enabled = false;
+        Units[4].GetComponent<Light>().enabled = false;
 
     }
 
@@ -39,13 +44,19 @@ public class CharSwitcher : MonoBehaviour
             //twoScript.enabled = false;
             //Two.GetComponent<CharacterMover>().enabled = false;
 
+            Debug.Log(Hero.name + " current HP: " + Hero.HP);
+
             Units[0].GetComponent<CharacterMover>().enabled = true;
             Units[1].GetComponent<CharacterMover>().enabled = false;
             Units[2].GetComponent<CharacterMover>().enabled = false;
+            Units[3].GetComponent<CharacterMover>().enabled = false;
+            Units[4].GetComponent<CharacterMover>().enabled = false;
 
             Units[0].GetComponent<Light>().enabled = true;
             Units[1].GetComponent<Light>().enabled = false;
             Units[2].GetComponent<Light>().enabled = false;
+            Units[3].GetComponent<Light>().enabled = false;
+            Units[4].GetComponent<Light>().enabled = false;
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha2))
@@ -55,13 +66,19 @@ public class CharSwitcher : MonoBehaviour
             //Hero.GetComponent<CharacterMover>().enabled = false;
             //Two.GetComponent<CharacterMover>().enabled = true;
 
+            Debug.Log(Two.name + " current HP: " + Two.HP);
+
             Units[0].GetComponent<CharacterMover>().enabled = false;
             Units[1].GetComponent<CharacterMover>().enabled = true;
             Units[2].GetComponent<CharacterMover>().enabled = false;
+            Units[3].GetComponent<CharacterMover>().enabled = false;
+            Units[4].GetComponent<CharacterMover>().enabled = false;
 
             Units[0].GetComponent<Light>().enabled = false;
             Units[1].GetComponent<Light>().enabled = true;
             Units[2].GetComponent<Light>().enabled = false;
+            Units[3].GetComponent<Light>().enabled = false;
+            Units[4].GetComponent<Light>().enabled = false;
         }
 
 
@@ -72,13 +89,63 @@ public class CharSwitcher : MonoBehaviour
             //Hero.GetComponent<CharacterMover>().enabled = false;
             //Two.GetComponent<CharacterMover>().enabled = true;
 
+            Debug.Log(Three.name + " current HP: " + Three.HP);
+
             Units[0].GetComponent<CharacterMover>().enabled = false;
             Units[1].GetComponent<CharacterMover>().enabled = false;
             Units[2].GetComponent<CharacterMover>().enabled = true;
+            Units[3].GetComponent<CharacterMover>().enabled = false;
+            Units[4].GetComponent<CharacterMover>().enabled = false;
 
             Units[0].GetComponent<Light>().enabled = false;
             Units[1].GetComponent<Light>().enabled = false;
             Units[2].GetComponent<Light>().enabled = true;
+            Units[3].GetComponent<Light>().enabled = false;
+            Units[4].GetComponent<Light>().enabled = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            //heroScript.enabled = false;
+            //twoScript.enabled = true;
+            //Hero.GetComponent<CharacterMover>().enabled = false;
+            //Two.GetComponent<CharacterMover>().enabled = true;
+
+            Debug.Log(Four.name + " current HP: " + Four.HP);
+
+            Units[0].GetComponent<CharacterMover>().enabled = false;
+            Units[1].GetComponent<CharacterMover>().enabled = false;
+            Units[2].GetComponent<CharacterMover>().enabled = false;
+            Units[3].GetComponent<CharacterMover>().enabled = true;
+            Units[4].GetComponent<CharacterMover>().enabled = false;
+
+            Units[0].GetComponent<Light>().enabled = false;
+            Units[1].GetComponent<Light>().enabled = false;
+            Units[2].GetComponent<Light>().enabled = false;
+            Units[3].GetComponent<Light>().enabled = true;
+            Units[4].GetComponent<Light>().enabled = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            //heroScript.enabled = false;
+            //twoScript.enabled = true;
+            //Hero.GetComponent<CharacterMover>().enabled = false;
+            //Two.GetComponent<CharacterMover>().enabled = true;
+
+            Debug.Log(Five.name + " current HP: " + Five.HP);
+
+            Units[0].GetComponent<CharacterMover>().enabled = false;
+            Units[1].GetComponent<CharacterMover>().enabled = false;
+            Units[2].GetComponent<CharacterMover>().enabled = false;
+            Units[3].GetComponent<CharacterMover>().enabled = false;
+            Units[4].GetComponent<CharacterMover>().enabled = true;
+
+            Units[0].GetComponent<Light>().enabled = false;
+            Units[1].GetComponent<Light>().enabled = false;
+            Units[2].GetComponent<Light>().enabled = false;
+            Units[3].GetComponent<Light>().enabled = false;
+            Units[4].GetComponent<Light>().enabled = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -96,10 +163,14 @@ public class CharSwitcher : MonoBehaviour
         Units[0].GetComponent<CharacterMover>().enabled = true;
         Units[1].GetComponent<CharacterMover>().enabled = true;
         Units[2].GetComponent<CharacterMover>().enabled = true;
+        Units[3].GetComponent<CharacterMover>().enabled = true;
+        Units[4].GetComponent<CharacterMover>().enabled = true;
 
         Units[0].GetComponent<Light>().enabled = true;
         Units[1].GetComponent<Light>().enabled = true;
         Units[2].GetComponent<Light>().enabled = true;
+        Units[3].GetComponent<Light>().enabled = true;
+        Units[4].GetComponent<Light>().enabled = true;
     }
 
     void AllOff()
@@ -107,9 +178,13 @@ public class CharSwitcher : MonoBehaviour
         Units[0].GetComponent<CharacterMover>().enabled = false;
         Units[1].GetComponent<CharacterMover>().enabled = false;
         Units[2].GetComponent<CharacterMover>().enabled = false;
+        Units[3].GetComponent<CharacterMover>().enabled = false;
+        Units[4].GetComponent<CharacterMover>().enabled = false;
 
         Units[0].GetComponent<Light>().enabled = false;
         Units[1].GetComponent<Light>().enabled = false;
         Units[2].GetComponent<Light>().enabled = false;
+        Units[3].GetComponent<Light>().enabled = false;
+        Units[4].GetComponent<Light>().enabled = false;
     }
 }
