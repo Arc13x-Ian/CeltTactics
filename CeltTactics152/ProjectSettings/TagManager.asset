@@ -46,3 +46,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: base
+    uniqueID: 194225963
+    locked: 0
+  - name: backmid
+    uniqueID: 1469824279
+    locked: 0
+  - name: offhandobj
+    uniqueID: 2987216059
+    locked: 0
+  - name: mid
+    uniqueID: 3699084641
+    locked: 0
+  - name: mainhandobj
+    uniqueID: 2824645433
+    locked: 0
+  - name: overmid
+    uniqueID: 2951973993
+    locked: 0

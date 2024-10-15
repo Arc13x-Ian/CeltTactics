@@ -30,6 +30,11 @@ public class EnemyCombatStats : MonoBehaviour
             HP = maxHP;
         }
 
+        if (ScoreSystem.done == true)
+        {
+            Destroy(gameObject);
+        }
+
         if (HP <= 0)
         {
             ScoreSystem.kills++;

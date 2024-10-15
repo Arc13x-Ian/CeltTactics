@@ -13,6 +13,7 @@ public class CharSwitcher : MonoBehaviour
 
     public GameObject[] Units;
 
+    public VictoryChecker ScoreSystem;
     //private Component heroScript;
     //private CharacterMover twoScript;
 
@@ -36,6 +37,11 @@ public class CharSwitcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (ScoreSystem.done == true)
+        {
+            GameStop();
+        }
 
         if(Input.GetKeyUp(KeyCode.Alpha1))
         {
@@ -156,6 +162,21 @@ public class CharSwitcher : MonoBehaviour
         {
             AllOff();
         }
+    }
+
+    void GameStop()
+    {
+        Units[0].GetComponent<CharacterMover>().enabled = false;
+        Units[1].GetComponent<CharacterMover>().enabled = false;
+        Units[2].GetComponent<CharacterMover>().enabled = false;
+        Units[3].GetComponent<CharacterMover>().enabled = false;
+        Units[4].GetComponent<CharacterMover>().enabled = false;
+
+        Units[0].GetComponent<Light>().enabled = false;
+        Units[1].GetComponent<Light>().enabled = false;
+        Units[2].GetComponent<Light>().enabled = false;
+        Units[3].GetComponent<Light>().enabled = false;
+        Units[4].GetComponent<Light>().enabled = false;
     }
 
     void AllOn()
