@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class CombatStats : MonoBehaviour
 {
     public NavMeshAgent unit;
+    public Animator anim;
 
     public float HP = 10.0f;
     public float maxHP;
@@ -14,6 +15,8 @@ public class CombatStats : MonoBehaviour
     public string name = "...";
 
     private int killcounter;
+    public float speed = 0.0f;
+    private Vector3 oldPos;
 
     public VictoryChecker ScoreSystem;
     // Start is called before the first frame update
@@ -22,11 +25,17 @@ public class CombatStats : MonoBehaviour
         maxHP = HP;
 
         killcounter = 0;
+
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        oldPos = transform.position;
+
+        speed = Vector3.Distance(oldPos, transform.position);
+
         if (HP > maxHP)
         {
             HP = maxHP;
@@ -50,6 +59,7 @@ public class CombatStats : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            anim.SetBool("IsAttacking", true);
             InvokeRepeating("TakeDamage", 1.0f, 2.0f);
         }
     }
@@ -63,6 +73,7 @@ public class CombatStats : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        anim.SetBool("IsAttacking", false);
         CancelInvoke("TakeDamage");
     }
 
@@ -77,6 +88,11 @@ public class CombatStats : MonoBehaviour
         }
 
         HP = HP - finalDamage;
+        
+        if (finalDamage > 0)
+        {
+            anim.SetTrigger("Ouch");
+        }
 
         Debug.Log(name + " has taken " + finalDamage + " damage!");
     }
@@ -85,5 +101,6 @@ public class CombatStats : MonoBehaviour
     {
         CancelInvoke();
         killcounter = ScoreSystem.kills;
+        anim.SetBool("IsAttacking", false);
     }
 }

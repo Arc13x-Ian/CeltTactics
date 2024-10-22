@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyCombatStats : MonoBehaviour
 {
+    public Animator anim;
+
     public float HP = 5.0f;
     public float maxHP;
     public int atk = 0;
@@ -20,6 +22,8 @@ public class EnemyCombatStats : MonoBehaviour
         killcount = 0;
 
         GetComponent<Light>().enabled = false;
+
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -53,7 +57,8 @@ public class EnemyCombatStats : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            InvokeRepeating("TakeDamage", 1.0f, 2.0f);
+            anim.SetBool("IsAttacking", true);
+            InvokeRepeating("TakeDamage", 1.5f, 2.0f);
         }
     }
 
@@ -67,6 +72,7 @@ public class EnemyCombatStats : MonoBehaviour
     
     void OnTriggerExit(Collider other)
     {
+        anim.SetBool("IsAttacking", false);
         CancelInvoke("TakeDamage");
         GetComponent<Light>().enabled = false;
     }
@@ -83,6 +89,11 @@ public class EnemyCombatStats : MonoBehaviour
 
         GetComponent<Light>().enabled = true;
 
+        if (finalDamage > 0)
+        {
+            anim.SetTrigger("Ouch");
+        }
+
         HP = HP - finalDamage;
 
         Debug.Log("Enemy takes " + finalDamage + " damage!");
@@ -90,6 +101,7 @@ public class EnemyCombatStats : MonoBehaviour
 
     private void StopDying()
     {
+        anim.SetBool("IsAttacking", false);
         CancelInvoke();
         killcount = ScoreSystem.deaths;
     }

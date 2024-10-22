@@ -10,6 +10,7 @@ public class VictoryChecker : MonoBehaviour
     public int time;
 
     public bool done = false;
+    public AudioSource winSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,8 @@ public class VictoryChecker : MonoBehaviour
             Debug.Log("Final Score: " + finalScore);
 
             done = true;
+
+            winSound.Play();
         }
     }
 }

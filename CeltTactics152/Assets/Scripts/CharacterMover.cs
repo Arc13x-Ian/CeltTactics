@@ -7,10 +7,11 @@ public class CharacterMover : MonoBehaviour
 {
     public NavMeshAgent playerNav;
     public Camera gameCam;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
