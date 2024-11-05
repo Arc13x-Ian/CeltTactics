@@ -9,6 +9,7 @@ TagManager:
   - Healing
   - GoalFort
   - FriendlyUnit
+  - ShieldTag
   layers:
   - Default
   - TransparentFX

@@ -8,6 +8,7 @@ public class VictoryChecker : MonoBehaviour
     public int kills;
     public int deaths;
     public int time;
+    public int pickups;
 
     public bool done = false;
     public AudioSource winSound;
@@ -17,6 +18,7 @@ public class VictoryChecker : MonoBehaviour
         kills = 0;
         deaths = 0;
         time = 0;
+        pickups = 0;
         InvokeRepeating("timetick", 1.0f, 1.0f);
     }
 
@@ -35,10 +37,12 @@ public class VictoryChecker : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            int pickupscore = pickups * 3;
             int timescore = 120 - time;
-            int finalScore = timescore + kills - deaths;
+            int finalScore = timescore + kills + pickupscore - deaths;
             Debug.Log("You Won!");
             Debug.Log("Time Taken: " + time);
+            Debug.Log("Amulets Gathered: " + pickups);
             Debug.Log("Enemies Slain: " + kills);
             Debug.Log("Allies Lost: " + deaths);
             Debug.Log(".....");

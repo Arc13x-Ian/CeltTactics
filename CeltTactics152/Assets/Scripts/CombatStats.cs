@@ -7,6 +7,7 @@ public class CombatStats : MonoBehaviour
 {
     public NavMeshAgent unit;
     public Animator anim;
+    public LightSwitch buffLight;
 
     public float HP = 10.0f;
     public float maxHP;
@@ -17,6 +18,7 @@ public class CombatStats : MonoBehaviour
     private int killcounter;
     public float speed = 0.0f;
     private Vector3 oldPos;
+    private IEnumerator coroutine;
 
     public VictoryChecker ScoreSystem;
     // Start is called before the first frame update
@@ -27,6 +29,10 @@ public class CombatStats : MonoBehaviour
         killcounter = 0;
 
         anim = GetComponentInChildren<Animator>();
+
+        buffLight = GetComponentInChildren<LightSwitch>();
+
+        coroutine = ShieldPickup();
     }
 
     // Update is called once per frame
@@ -62,7 +68,14 @@ public class CombatStats : MonoBehaviour
             anim.SetBool("IsAttacking", true);
             InvokeRepeating("TakeDamage", 1.0f, 2.0f);
         }
+
+        if (other.CompareTag("ShieldTag"))
+        {
+            Debug.Log("Shield Pickup " + Time.time);
+            StartCoroutine(coroutine);
+        }
     }
+
     void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Healing"))
@@ -102,5 +115,17 @@ public class CombatStats : MonoBehaviour
         CancelInvoke();
         killcounter = ScoreSystem.kills;
         anim.SetBool("IsAttacking", false);
+    }
+
+    private IEnumerator ShieldPickup()
+    {
+        def = def + 3;
+        buffLight.switcher = true;
+
+        yield return new WaitForSeconds(10);
+
+        buffLight.switcher = false;
+        def = def - 3;
+        Debug.Log("Coroutine Ending " + Time.time);
     }
 }
