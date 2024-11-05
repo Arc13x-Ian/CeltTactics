@@ -18,7 +18,6 @@ public class CombatStats : MonoBehaviour
     private int killcounter;
     public float speed = 0.0f;
     private Vector3 oldPos;
-    private IEnumerator coroutine;
 
     public VictoryChecker ScoreSystem;
     // Start is called before the first frame update
@@ -31,8 +30,6 @@ public class CombatStats : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
 
         buffLight = GetComponentInChildren<LightSwitch>();
-
-        coroutine = ShieldPickup();
     }
 
     // Update is called once per frame
@@ -72,7 +69,7 @@ public class CombatStats : MonoBehaviour
         if (other.CompareTag("ShieldTag"))
         {
             Debug.Log("Shield Pickup " + Time.time);
-            StartCoroutine(coroutine);
+            StartCoroutine(ShieldPickup());
         }
     }
 
@@ -117,12 +114,12 @@ public class CombatStats : MonoBehaviour
         anim.SetBool("IsAttacking", false);
     }
 
-    private IEnumerator ShieldPickup()
+    IEnumerator ShieldPickup()
     {
         def = def + 3;
         buffLight.switcher = true;
 
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(10.0f);
 
         buffLight.switcher = false;
         def = def - 3;
