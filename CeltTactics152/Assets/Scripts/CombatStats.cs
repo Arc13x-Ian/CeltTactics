@@ -2,24 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class CombatStats : MonoBehaviour
 {
+    //These are for the unit swapping stuff
     public NavMeshAgent unit;
     public Animator anim;
     public LightSwitch buffLight;
 
+    //These are the direct combat stats
     public float HP = 10.0f;
     public float maxHP;
     public int atk = 1;
     public int def = 1;
     public string name = "...";
+    public GameObject self;
 
+    //I should've commented this earlier, who knows why I decided these need their own section. Spee and oldPos are for navmesh, but killcounter is not?
     private int killcounter;
     public float speed = 0.0f;
     private Vector3 oldPos;
 
+    //So the units kills/death can be put into the score count
     public VictoryChecker ScoreSystem;
+
+    //So the unit can tie its health to its healthbar
+    public Image hpBacker;
+    public Image hpBar;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +42,12 @@ public class CombatStats : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
 
         buffLight = GetComponentInChildren<LightSwitch>();
+
+        float hpLength = HP * 25;
+
+        //Funny little thing that makes the HP bar's max length dependent on the unit's max HP, as an easy visual indicator.
+        hpBacker.rectTransform.sizeDelta = new Vector2(hpLength, 50);
+        hpBar.rectTransform.sizeDelta = new Vector2(hpLength - 10, 40);
     }
 
     // Update is called once per frame
@@ -49,13 +67,16 @@ public class CombatStats : MonoBehaviour
             ScoreSystem.deaths++;
             CancelInvoke();
             Debug.Log(name + " has died!");
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            self.SetActive(false);
         }
 
         if (killcounter < ScoreSystem.kills)
         {
             StopDying();
         }
+
+        hpBar.fillAmount = Mathf.Clamp(HP / maxHP, 0, 1);
     }
 
     void OnTriggerEnter(Collider other)
