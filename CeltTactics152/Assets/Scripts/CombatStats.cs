@@ -31,7 +31,7 @@ public class CombatStats : MonoBehaviour
     public Image hpBacker;
     public Image hpBar;
 
-
+    public AudioSource fightSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -123,6 +123,8 @@ public class CombatStats : MonoBehaviour
         if (finalDamage > 0)
         {
             anim.SetTrigger("Ouch");
+
+            fightSound.Play();
         }
 
         Debug.Log(name + " has taken " + finalDamage + " damage!");

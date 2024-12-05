@@ -194,7 +194,7 @@ public class CharSwitcher : MonoBehaviour
         Units[4].GetComponent<Light>().enabled = true;
     }
 
-    void AllOff()
+    public void AllOff()
     {
         Units[0].GetComponent<CharacterMover>().enabled = false;
         Units[1].GetComponent<CharacterMover>().enabled = false;

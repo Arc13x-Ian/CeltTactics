@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour
     public GameObject instructions;
     public GameObject settings;
     public GameObject menuButtons;
+    public GameObject credits;
+    public GameObject creditsButton;
 
     // Start is called before the first frame update
     void Start()
@@ -46,10 +48,17 @@ public class MainMenu : MonoBehaviour
     public void CloseSettings()
     {
         settings.SetActive(false);
+        credits.SetActive(false);
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void LoadCredits()
+    {
+        credits.SetActive(true);
+        creditsButton.SetActive(false);
     }
 }

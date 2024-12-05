@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class VictoryChecker : MonoBehaviour
 {
@@ -15,6 +17,16 @@ public class VictoryChecker : MonoBehaviour
 
     public bool done = false;
     public AudioSource winSound;
+
+    public GameObject victoryUI;
+
+    public TextMeshProUGUI timeText;
+    public TextMeshProUGUI amuletText;
+    public TextMeshProUGUI killsText;
+    public TextMeshProUGUI eliteText;
+    public TextMeshProUGUI deathsText;
+    public TextMeshProUGUI sideObjText;
+    public TextMeshProUGUI finalScoreText;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +42,10 @@ public class VictoryChecker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (deaths == 5)
+        {
+            SceneManager.LoadScene("LoseScene");
+        }
     }
 
     void timetick()
@@ -58,6 +73,22 @@ public class VictoryChecker : MonoBehaviour
             done = true;
 
             winSound.Play();
+
+            victoryUI.SetActive(true);
+            timeText.text = "Time Taken: " + time;
+            amuletText.text = "Amulets Gathered: " + pickups;
+            killsText.text = kills + " normal enemies."; 
+            eliteText.text = eliteKills + " elite enemies!";
+            deathsText.text = "Allies Lost: " + deaths;
+            if (sideForts > 0)
+            {
+                sideObjText.text = "Side Fort Captured!";
+            }
+            else
+            {
+                sideObjText.text = "Side Fort Not Captured.";
+            }
+            finalScoreText.text = "Final Score: " + finalScore;
         }
     }
 }

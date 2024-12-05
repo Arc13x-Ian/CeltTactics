@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleMapTester.unity
     guid: fdb018068ce131142b417e9a5004b47b
+  - enabled: 1
+    path: Assets/Scenes/LoseScene.unity
+    guid: 9e8d599914406fe40a5126a48ee9ef36
   m_configObjects: {}
